@@ -1,17 +1,17 @@
 import React from 'react'
-import { Router, Route, Redirect, hashHistory } from 'react-router'
+import { BrowserRouter as Router, Switch, Route }  from "react-router-dom";
 
 import Todo from '../todo/todo'
 import About from '../about/about'
 
 export default props => {
-    console.log("hi")
-
-    (
-    <Router history={hashHistory}>
-        <Route path='/todos' component={Todo}/>
-        <Route path='/about' component={About}/>
-        <Redirect from='*' to='/todos'/>
-    </Router>
+    return (
+        <Router>
+            <Switch>
+                <Route path='*' component={Todo}/>
+                <Route path='/todos' component={Todo}/>
+                <Route path='/about' component={About}/>
+            </Switch>
+        </Router>
     )
 }
