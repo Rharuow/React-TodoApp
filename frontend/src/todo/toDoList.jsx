@@ -2,6 +2,11 @@ import React from 'react'
 
 export default props => (
     <div>
-        <h1>List</h1>
+        {console.log("PROPS LSIT", props.list)}
+        <ul>
+            {props.list.forEach(item => {
+                console.log("item", item.description)
+            })}
+        </ul>
     </div>
 )

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
 import PageHeader from '../template/pageHeader'
@@ -16,16 +16,32 @@ const Todo = (props) => {
         setDescription(e.target.value)
     }
 
+    function refresh () {
+        axios.get(`${URL}?sort=-createdAt`)
+        .then(res => {
+            setDescription('')
+            setList(res.data)        
+            })
+    }
+
     const handleAdd = () => {
         axios.post(URL, {description})
-            .then(resp => console.log("all right!"))
+            .then(resp => refresh())
     }
+
+    useEffect(() => {
+        refresh()
+        console.log("useEffect")
+        console.log("state description: ", description)  
+        console.log("state list: ", list)
+        console.log("---------------")
+    }, [])
 
     return(
         <div>
             <PageHeader name="Tarefas" small="Cadastro"/>
             <TodoForm action={handleAdd} descriptionAction={descriptionStateControl}/>
-            <TodoList/>
+            <TodoList list={list}/>
         </div>
     )
 }
