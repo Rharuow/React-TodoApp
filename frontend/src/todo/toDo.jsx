@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
+import axios from 'axios'
+
 import PageHeader from '../template/pageHeader'
 import TodoList from './toDoList'
 import TodoForm from './toDoForm'
+
+const URL = 'http://localhost:3003/api/todos/'
 
 const Todo = (props) => {
 
@@ -13,7 +17,8 @@ const Todo = (props) => {
     }
 
     const handleAdd = () => {
-        console.log(this)
+        axios.post(URL, {description})
+            .then(resp => console.log("all right!"))
     }
 
     return(
