@@ -13,7 +13,7 @@ export default props => {
                 <Route path='*'>
                     <h1>{useLocation().pathname}</h1>
                 </Route>
-                <Redirect from="*" to="/todos/"/>
+                <Redirect from="*" to="/todos"/>
             </Switch>
         </React.Fragment>
     )

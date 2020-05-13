@@ -1,9 +1,10 @@
 import React from 'react'
+import PageHeader from '../template/pageHeader'
 
 const Todo = (props) => {
     return(
         <div>
-            <h1>To-Do</h1>
+            <PageHeader name="Tarefas" small="Cadastro"/>
         </div>
     )
 }
