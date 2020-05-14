@@ -12,11 +12,11 @@ const Todo = (props) => {
     const [description, setDescription] = useState('')
     const [list, setList] = useState([])
 
-    const refresh = () => {
-        axios.get(`${URL}?sort=+createdAt`)
+    const refresh = (description = '') => {
+        const search = description ? `&description__regex=/${description}/`: ''
+        axios.get(`${URL}?sort=-createAt${search}`)
         .then(res => {
-            console.log("REFRESH")
-            console.log("DESCRIPTION: ", description)  
+            setDescription(description)  
             setList(res.data)   
             })
     }
@@ -28,39 +28,37 @@ const Todo = (props) => {
     const handleAdd = () => {
         axios.post(URL, {description})
         .then( res => {
-            console.log("handleAdd")
-            console.log("DESCRIPTION: ", description)
-            setDescription('')
             refresh()
         })
     }
 
     const handleRemove = (todo) => {
         axios.delete(`${URL}/${todo._id}`)
-        .then(res => refresh())
+        .then(res => refresh(description))
     }
 
     const handleMarkAsDone = (todo) => {
         axios.put(`${URL}/${todo._id}`, {...todo, done: true })
-        .then(res => refresh())
+        .then(res => refresh(description))
     }
 
     const handleMarkAsPending = (todo) => {
         axios.put(`${URL}/${todo._id}`, {...todo, done: false })
-        .then(res => refresh())
+        .then(res => refresh(description))
+    }
+
+    const handleSearch = (todo) => {
+        refresh(description)
     }
 
     useEffect(() => {
-        refresh()
-        console.log("useEffect")
-        console.log("DESCRIPTION: ", description)  
-        console.log("---------------")
+        refresh(description)
     }, [])
 
     return(
         <div>
             <PageHeader name="Tarefas" small="Cadastro"/>
-            <TodoForm action={handleAdd} value={description} descriptionAction={descriptionStateControl}/>
+            <TodoForm action={handleAdd} value={description} handleSearch={handleSearch} descriptionAction={descriptionStateControl}/>
             <TodoList list={list} handleRemove={handleRemove} handleMarkAsDone={handleMarkAsDone} handleMarkAsPending={handleMarkAsPending}/>
         </div>
     )
