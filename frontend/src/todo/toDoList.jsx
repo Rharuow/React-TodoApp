@@ -1,5 +1,6 @@
 import React from 'react'
 import IconButton from '../template/iconButton'
+import If from '../template/if'
 
 export default props => 
 {
@@ -9,11 +10,12 @@ export default props =>
         return (
             list.map(todo => {
                 return(
-                    <tr key={todo._id}>
+                    <tr key={todo._id} className={todo.done ? 'markedAsDone' : ''}>
                         <td key={todo._id}>{todo.description}</td>
                         <td>
-                            <IconButton style="success" icon="check" onClick={() => props.handleMarkAsDone(todo)}/>
-                            <IconButton style="danger" icon="trash-o" onClick={() => props.handleRemove(todo)}/>
+                            <IconButton hide={!todo.done} style="warning" icon="undo" onClick={() => props.handleMarkAsPending(todo)}/>
+                            <IconButton hide={todo.done} style="success" icon="check" onClick={() => props.handleMarkAsDone(todo)}/>
+                            <IconButton hide={!todo.done} style="danger" icon="trash-o" onClick={() => props.handleRemove(todo)}/>
                         </td>
                     </tr>
                 )

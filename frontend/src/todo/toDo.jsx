@@ -37,7 +37,17 @@ const Todo = (props) => {
 
     const handleRemove = (todo) => {
         axios.delete(`${URL}/${todo._id}`)
-        .then(resp => refresh())
+        .then(res => refresh())
+    }
+
+    const handleMarkAsDone = (todo) => {
+        axios.put(`${URL}/${todo._id}`, {...todo, done: true })
+        .then(res => refresh())
+    }
+
+    const handleMarkAsPending = (todo) => {
+        axios.put(`${URL}/${todo._id}`, {...todo, done: false })
+        .then(res => refresh())
     }
 
     useEffect(() => {
@@ -51,7 +61,7 @@ const Todo = (props) => {
         <div>
             <PageHeader name="Tarefas" small="Cadastro"/>
             <TodoForm action={handleAdd} value={description} descriptionAction={descriptionStateControl}/>
-            <TodoList list={list} handleRemove={handleRemove}/>
+            <TodoList list={list} handleRemove={handleRemove} handleMarkAsDone={handleMarkAsDone} handleMarkAsPending={handleMarkAsPending}/>
         </div>
     )
 }
