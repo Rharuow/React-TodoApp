@@ -5,43 +5,53 @@ import PageHeader from '../template/pageHeader'
 import TodoList from './toDoList'
 import TodoForm from './toDoForm'
 
-const URL = 'http://localhost:3003/api/todos/'
+const URL = 'http://localhost:3003/api/todos'
 
 const Todo = (props) => {
 
     const [description, setDescription] = useState('')
     const [list, setList] = useState([])
 
+    const refresh = () => {
+        axios.get(`${URL}?sort=+createdAt`)
+        .then(res => {
+            console.log("REFRESH")
+            console.log("DESCRIPTION: ", description)  
+            setList(res.data)   
+            })
+    }
+
     const descriptionStateControl = (e) => {
         setDescription(e.target.value)
     }
 
-    function refresh () {
-        axios.get(`${URL}?sort=-createdAt`)
-        .then(res => {
-            setDescription('')
-            setList(res.data)        
-            })
-    }
-
     const handleAdd = () => {
         axios.post(URL, {description})
-            .then(resp => refresh())
+        .then( res => {
+            console.log("handleAdd")
+            console.log("DESCRIPTION: ", description)
+            setDescription('')
+            refresh()
+        })
+    }
+
+    const handleRemove = (todo) => {
+        axios.delete(`${URL}/${todo._id}`)
+        .then(resp => refresh())
     }
 
     useEffect(() => {
         refresh()
         console.log("useEffect")
-        console.log("state description: ", description)  
-        console.log("state list: ", list)
+        console.log("DESCRIPTION: ", description)  
         console.log("---------------")
     }, [])
 
     return(
         <div>
             <PageHeader name="Tarefas" small="Cadastro"/>
-            <TodoForm action={handleAdd} descriptionAction={descriptionStateControl}/>
-            <TodoList list={list}/>
+            <TodoForm action={handleAdd} value={description} descriptionAction={descriptionStateControl}/>
+            <TodoList list={list} handleRemove={handleRemove}/>
         </div>
     )
 }
