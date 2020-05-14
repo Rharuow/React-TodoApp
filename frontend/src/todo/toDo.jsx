@@ -51,6 +51,10 @@ const Todo = (props) => {
         refresh(description)
     }
 
+    const handleClear = (todo) => {
+        refresh()
+    }
+
     useEffect(() => {
         refresh(description)
     }, [])
@@ -58,8 +62,19 @@ const Todo = (props) => {
     return(
         <div>
             <PageHeader name="Tarefas" small="Cadastro"/>
-            <TodoForm action={handleAdd} value={description} handleSearch={handleSearch} descriptionAction={descriptionStateControl}/>
-            <TodoList list={list} handleRemove={handleRemove} handleMarkAsDone={handleMarkAsDone} handleMarkAsPending={handleMarkAsPending}/>
+            <TodoForm 
+                action={handleAdd} 
+                value={description} 
+                handleSearch={handleSearch} 
+                descriptionAction={descriptionStateControl} 
+                handleClear={handleClear}
+                />
+            <TodoList 
+                list={list} 
+                handleRemove={handleRemove} 
+                handleMarkAsDone={handleMarkAsDone} 
+                handleMarkAsPending={handleMarkAsPending}
+            />
         </div>
     )
 }
