@@ -8,9 +8,9 @@ export default props => {
     return (
         <React.Fragment>
             <Switch>
-                <Route path="*" component={Todo}/>
                 <Route path='/todos' component={Todo}/>
                 <Route path='/about' component={About}/>
+                <Route path="/" component={Todo}/>
                 {/* <Route path='*'>
                     <h1>{useLocation().pathname}</h1>
                 </Route>
