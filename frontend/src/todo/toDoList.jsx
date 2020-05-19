@@ -3,6 +3,7 @@ import IconButton from '../template/iconButton'
 import If from '../template/if'
 
 import { connect } from 'react-redux'
+import { changeDescription } from '../actions/description'
 
 const List = props => 
 {
