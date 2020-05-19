@@ -1,4 +1,4 @@
-import CHANGE_DESCRIPTION from '../actions/actionTypes'
+import { CHANGE_DESCRIPTION, TODO_SEARCHED } from '../actions/actionTypes'
 
 const INITIAL_STATE = {
     description: 'Ler livro',
@@ -23,6 +23,11 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 description: action.payload,
+            }
+        case TODO_SEARCHED:
+            return {
+                ...state,
+                list: action.payload,
             }
         default:
             return state
