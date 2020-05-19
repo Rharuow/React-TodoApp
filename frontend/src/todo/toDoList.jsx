@@ -2,7 +2,9 @@ import React from 'react'
 import IconButton from '../template/iconButton'
 import If from '../template/if'
 
-export default props => 
+import { connect } from 'react-redux'
+
+const List = props => 
 {
  
     const renderRows = () => {
@@ -37,3 +39,9 @@ export default props =>
         </table>
     )
 }
+
+const mapStateToProps = state => ({
+    list: state.todo.list
+})
+
+export default connect(mapStateToProps)(List)
