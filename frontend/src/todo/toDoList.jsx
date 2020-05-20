@@ -3,7 +3,7 @@ import IconButton from '../template/iconButton'
 
 import { connect } from 'react-redux'
 
-import { handleMarkAsDone, handleMarkAsPending } from '../actions/todoActions'
+import { handleMarkAsDone, handleMarkAsPending, handleRemove } from '../actions/todoActions'
 import { bindActionCreators } from 'redux'
 
 const List = props => 
@@ -47,7 +47,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => 
-    bindActionCreators({ handleMarkAsDone, handleMarkAsPending }, dispatch)
+    bindActionCreators({ handleMarkAsDone, handleMarkAsPending, handleRemove }, dispatch)
 
 
 export default connect(

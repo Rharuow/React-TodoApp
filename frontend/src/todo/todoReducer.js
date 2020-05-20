@@ -4,6 +4,7 @@ import {
     ADD_TODO,
     CLEAN_DISPLAY,
     CHANGE_STATUS,
+    TODO_DELETE,
 } from '../actions/actionTypes'
 
 const INITIAL_STATE = { description: '', list: [] }
@@ -30,6 +31,10 @@ export default (state = INITIAL_STATE, action) => {
                 description: ''
             }
         case CHANGE_STATUS:
+            return {
+                ...state,
+            }
+        case TODO_DELETE:
             return {
                 ...state,
             }
