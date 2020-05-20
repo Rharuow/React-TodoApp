@@ -23,12 +23,9 @@ export const search = () => {
 }
 
 export const addTodo = description => {
-    const request = axios.post(URL, { description })
-
-    //The middleware multi of redux-multi allow call other actions through an array
-
-    return ([
-        { type: ADD_TODO, payload: request },
-        search()
-    ])
+    return dispatch => {
+        axios.post(URL, { description })
+        .then(res => dispatch({ type: ADD_TODO, payload: request }))
+        .then(res => dispatch(search()))
+    }
 }
