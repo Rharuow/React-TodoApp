@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { CHANGE_DESCRIPTION, TODO_SEARCHED } from './actionTypes'
+import { CHANGE_DESCRIPTION, TODO_SEARCHED, ADD_TODO } from './actionTypes'
 
 const URL = `http://localhost:3003/api/todos`
 
@@ -16,6 +16,15 @@ export const search = () => {
 
     return ({
         type: TODO_SEARCHED,
-        payload: request.data,
+        payload: request,
+    })
+}
+
+export const addTodo = description => {
+    const request = axios.post(URL, { description })
+
+    return ({
+        type: ADD_TODO,
+        payload: request
     })
 }
