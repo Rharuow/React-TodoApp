@@ -1,3 +1,4 @@
 export const CHANGE_DESCRIPTION = "CHANGE_DESCRIPTION"
 export const TODO_SEARCHED = "TODO_SEARCHED"
 export const ADD_TODO = "ADD_TODO"
+export const CLEAN_DISPLAY = "CLEAN_DISPLAY"
