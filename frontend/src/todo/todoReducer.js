@@ -1,4 +1,10 @@
-import { CHANGE_DESCRIPTION, TODO_SEARCHED, ADD_TODO, CLEAN_DISPLAY } from '../actions/actionTypes'
+import { 
+    CHANGE_DESCRIPTION,
+    TODO_SEARCHED,
+    ADD_TODO,
+    CLEAN_DISPLAY,
+    CHANGE_STATUS,
+} from '../actions/actionTypes'
 
 const INITIAL_STATE = { description: '', list: [] }
 
@@ -22,6 +28,10 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 description: ''
+            }
+        case CHANGE_STATUS:
+            return {
+                ...state,
             }
         default:
             return state

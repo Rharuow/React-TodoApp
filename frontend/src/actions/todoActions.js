@@ -1,6 +1,12 @@
 import axios from 'axios'
 
-import { CHANGE_DESCRIPTION, TODO_SEARCHED, ADD_TODO, CLEAN_DISPLAY } from './actionTypes'
+import { 
+    CHANGE_DESCRIPTION,
+    TODO_SEARCHED,
+    ADD_TODO,
+    CLEAN_DISPLAY,
+    CHANGE_STATUS,
+} from './actionTypes'
 
 const URL = `http://localhost:3003/api/todos`
 
@@ -36,5 +42,21 @@ export const addTodo = description => {
 export const clearDisplay = () => {
     return {
         type: CLEAN_DISPLAY,
+    }
+}
+
+export const handleMarkAsDone = todo => {
+    return dispatch => {
+        axios.put(`${URL}/${todo._id}`, {...todo, done: true})
+        .then(res => dispatch({ type: CHANGE_STATUS }))
+        .then(res => dispatch(search()))
+    }
+}
+
+export const handleMarkAsPending = todo => {
+    return dispatch => {
+        axios.put(`${URL}/${todo._id}`, {...todo, done: false})
+        .then(res => dispatch({ type: CHANGE_STATUS }))
+        .then(res => dispatch(search()))
     }
 }
