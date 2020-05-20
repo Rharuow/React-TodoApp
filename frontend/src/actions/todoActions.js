@@ -14,6 +14,8 @@ export const changeDescription = event => {
 export const search = () => {
     const request = axios.get(`${URL}?sort=-createdAt`)
 
+    //The middleware promise of redux-promise wait the response async and passed to next action to dispatch
+
     return ({
         type: TODO_SEARCHED,
         payload: request,
@@ -23,8 +25,10 @@ export const search = () => {
 export const addTodo = description => {
     const request = axios.post(URL, { description })
 
-    return ({
-        type: ADD_TODO,
-        payload: request
-    })
+    //The middleware multi of redux-multi allow call other actions through an array
+
+    return ([
+        { type: ADD_TODO, payload: request },
+        search()
+    ])
 }
