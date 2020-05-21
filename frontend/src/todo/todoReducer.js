@@ -1,10 +1,7 @@
 import { 
     CHANGE_DESCRIPTION,
     TODO_SEARCHED,
-    ADD_TODO,
     CLEAN_DISPLAY,
-    CHANGE_STATUS,
-    TODO_DELETE,
 } from '../actions/actionTypes'
 
 const INITIAL_STATE = { description: '', list: [] }
@@ -19,24 +16,12 @@ export default (state = INITIAL_STATE, action) => {
         case TODO_SEARCHED:
             return {
                 ...state,
-                list: action.payload.data,
-            }
-        case ADD_TODO:
-            return {
-                ...state,
+                list: action.payload,
             }
         case CLEAN_DISPLAY:
             return {
                 ...state,
                 description: ''
-            }
-        case CHANGE_STATUS:
-            return {
-                ...state,
-            }
-        case TODO_DELETE:
-            return {
-                ...state,
             }
         default:
             return state

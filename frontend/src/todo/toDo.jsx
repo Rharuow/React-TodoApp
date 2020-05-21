@@ -1,11 +1,8 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import React from 'react'
 
 import PageHeader from '../template/pageHeader'
 import TodoList from './toDoList'
 import TodoForm from './toDoForm'
-
-const URL = 'http://localhost:3003/api/todos'
 
 const Todo = (props) => {
 

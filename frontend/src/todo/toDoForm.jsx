@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 
 import { connect } from 'react-redux'
 
-import { changeDescription, search, addTodo, clearDisplay } from '../actions/todoActions'
+import { changeDescription, search, addTodo, cleanDisplay } from '../actions/todoActions'
 
 const TodoForm = props => {
 
@@ -18,7 +18,7 @@ const TodoForm = props => {
         if (e.key === "Enter") {
             e.shiftKey ? search() : addTodo(description)
         } else if(e.key === "Escape") {
-            props.clearDisplay()
+            props.cleanDisplay()
         }
     }
     
@@ -32,7 +32,7 @@ const TodoForm = props => {
         <Grid cols='12 3 2'>
             <IconButton style="primary" onClick={() => props.addTodo(props.description)} icon="plus"/>
             <IconButton style="info" icon="search" onClick={() => props.search()}/>
-            <IconButton style="default" icon="close" onClick={props.clearDisplay}/>
+            <IconButton style="default" icon="close" onClick={props.cleanDisplay}/>
         </Grid>
 
     </div>   
@@ -44,7 +44,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => 
-    bindActionCreators({ changeDescription, search, addTodo, clearDisplay }, dispatch)
+    bindActionCreators({ changeDescription, search, addTodo, cleanDisplay }, dispatch)
 
 export default connect(
         mapStateToProps,
